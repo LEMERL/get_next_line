@@ -88,7 +88,9 @@ SRC = ft_memset.c \
 	  ft_lstgetstart_db.c \
 	  ft_lstgetend_db.c \
 	  ft_lstdelone_db.c \
-	  ft_lstdel_db.c
+	  ft_lstdel_db.c \
+	  ft_lstdelall_db.c \
+	  ft_lsttochar_db.c
 
 OBJ = $(SRC:.c=.o)
 

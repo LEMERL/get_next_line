@@ -106,5 +106,7 @@ int					ft_lstlen(t_list *list);
 t_lst_db			*ft_lstgo_n_next(t_lst_db *lst, int n);
 t_lst_db			*ft_lstgo_n_prev(t_lst_db *lst, int n);
 void				ft_lstdlone_db(t_lst_db **alst, void (*del)(void*, size_t));
+void				ft_lstdelall_db(t_lst_db **lst);
+char				*ft_lsttochar_db(t_lst_db **lst);
 
 #endif
