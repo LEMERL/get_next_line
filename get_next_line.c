@@ -22,7 +22,7 @@ int		get_next_line(const int fd, char **line)
 	t_lst_db	**lst;
 	t_lst_db	*ini;
 	char		*tmp;
-
+/* perte a l'initialisation*/
 	ini = ft_lstnew_db(NULL, 0);
 	lst = &ini;
 	rd = gnl_rest(fd, lst, NULL);
@@ -30,18 +30,17 @@ int		get_next_line(const int fd, char **line)
 		return (-1);
 	while (rd > 0)
 	{
-		if (ft_strclen((*lst)->content, '\n') >= 0)
+		if ((ft_strclen((*lst)->content, '\n') >= 0) || (rd == 0 && str && ft_strlen(str) != 0))
 		{
 			tmp = ft_lsttochar_db(lst);
 			ft_lstdelall_db(lst);
+			ft_strdel(&str);
 			return (gnl_act(line, tmp));
 		}
 		if ((rd = read(fd, str, BUFF_SIZE)) < 0)
 			return (-1);
-		ft_lstadd_db(lst, ft_lstnew_db(str, ft_strlen(str)));
+		ft_lstadd_db(lst, ft_lstnew_db(str, ft_strlen(str))); // perte de memoire ?
 	}
-	if (rd == 0 && str && ft_strlen(str) != 0)
-		return (gnl_act(line, str));
 	return (0);
 }
 
@@ -54,7 +53,10 @@ int		gnl_rest(int fd, t_lst_db **lst, char *rst)
 	rd = 0;
 	if (rst != NULL)
 	{
-		rest = ft_lstnew_db(rst, ft_strlen(rst));
+		if (ft_strlen(rst) > 0)
+			rest = ft_lstnew_db(rst, ft_strlen(rst));
+		else
+			rest = NULL;
 		return (1);
 	}
 	else

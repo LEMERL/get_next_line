@@ -27,7 +27,7 @@ t_lst_db	*ft_lstnew_db(void const *cont, size_t cont_size)
 	else
 	{
 		ptr = NULL;
-		if ((ptr = (void*)malloc(cont_size)) == NULL)
+		if ((ptr = (void*)ft_strnew(cont_size)) == NULL)
 			return (NULL);
 		ft_memcpy(ptr, cont, cont_size);
 		new->content = ptr;

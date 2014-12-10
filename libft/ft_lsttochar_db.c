@@ -2,10 +2,12 @@
 
 char	*ft_lsttochar_db(t_lst_db **lst)
 {
-	char	*str;
-	int		size;
+	char		*str;
+	int			size;
+	t_lst_db	*ptr;
 
 	size = 0;
+	ptr = *lst;
 	while ((*lst) && (*lst)->next != NULL)
 	{
 		size = size + (*lst)->content_size;
@@ -20,5 +22,6 @@ char	*ft_lsttochar_db(t_lst_db **lst)
 		ft_strncat(str, (*lst)->content, (*lst)->content_size);
 		*lst = (*lst)->prev;
 	}
+	*lst = ptr;
 	return (str);
 }

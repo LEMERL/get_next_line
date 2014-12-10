@@ -14,7 +14,7 @@ NAME = libft.a
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 DIR = includes
 
@@ -97,17 +97,22 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+	@echo "\033[1;36m[Compile all \".o\"]\033[0m"
+	@ar rc $(NAME) $(OBJ)
+	@echo "\033[1;34m[Create libft.a]\033[0m"
+	@ranlib $(NAME)
 
 $(OBJ): $(SRC)
-	$(CC) $(FLAGS) -I $(DIR) -c $(SRC)
+	@echo "\033[1;36m[Compile all \".c\"]\033[0m"
+	@$(CC) $(FLAGS) -I $(DIR) -c $(SRC)
 
 clean:
-	rm -f $(OBJ)
+	@echo "\033[1;31m[Delete all \".o\"]\033[0m"
+	@rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	@echo "\033[1;31m[Delete libft.a]\033[0m"
+	@rm -f $(NAME)
 
 re: fclean all
 
