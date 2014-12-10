@@ -59,12 +59,13 @@ int		gnl_rest(int fd, t_lst_db **lst, char *rst)
 	}
 	else
 	{
-		if (rest == NULL || rest->content == NULL || rest->content_size == 0)
+		if (rest == NULL)
 		{
 			tmp = ft_strnew(BUFF_SIZE);
 			if ((rd = read(fd, tmp, BUFF_SIZE)) < 0)
 				return (-1);
 			rest = ft_lstnew_db(tmp, rd);
+			ft_strdel(&tmp);
 		}
 		ft_lstadd_db(lst, rest);
 		return (1);
@@ -77,9 +78,9 @@ int		gnl_act(char **line, char *str)
 	char		*rtn;
 
 	i = ft_strclen(str, '\n');
-	str[i + 1] = '\0';
 	if (i < 0)
 		i = ft_strlen(str);
+	str[i] = '\0';
 	if ((rtn = ft_strdup(str)) == NULL)
 		return (-1);
 	*line = rtn;
