@@ -6,7 +6,7 @@
 /*   By: mgrimald <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/07 12:38:37 by mgrimald          #+#    #+#             */
-/*   Updated: 2014/12/09 11:45:19 by mgrimald         ###   ########.fr       */
+/*   Updated: 2014/12/13 15:53:03 by mgrimald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ char	*ft_strnew(size_t size)
 	int		i;
 	int		j;
 
-	// 12 13 14 15 j -> 4
-	// 0  1  2  3  4
 	i = 0;
 	j = (int)size;
 	str = (char*)malloc(j + 1);
