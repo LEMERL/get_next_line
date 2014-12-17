@@ -6,15 +6,15 @@
 /*   By: mgrimald <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/03 12:43:49 by mgrimald          #+#    #+#             */
-/*   Updated: 2014/12/16 20:52:19 by mgrimald         ###   ########.fr       */
+/*   Updated: 2014/12/17 14:37:25 by mgrimald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	ft_lstdellone_db(t_lst_db **alst)
+static void		ft_lstdellone_db(t_lst_db **alst)
 {
-	t_lst_db	*temp;
+	t_lst_db		*temp;
 
 	temp = NULL;
 	if (alst && *alst)
@@ -37,15 +37,15 @@ void	ft_lstdellone_db(t_lst_db **alst)
 
 static t_lst_db	*gnl_recup_rest(int fd, t_lst_db **rest)
 {
-	t_lst_db	*tmp;
-	t_lst_db	*ptr;
+	t_lst_db		*tmp;
+	t_lst_db		*ptr;
 
 	ptr = *rest;
 	while (rest && *rest && (*rest)->prev)
 		(*rest) = (*rest)->prev;
 	while (rest && *rest)
 	{
-		if ((*rest)->content_size == (unsigned int) fd)
+		if ((*rest)->content_size == (unsigned int)fd)
 		{
 			tmp = (*rest)->content;
 			ft_lstdellone_db(rest);
@@ -59,27 +59,25 @@ static t_lst_db	*gnl_recup_rest(int fd, t_lst_db **rest)
 
 static int		gnl_rest(int fd, t_lst_db **lst, char *rst)
 {
-	static t_lst_db		*rest = NULL;
-	t_lst_db			*temp;
-	t_lst_db			*ini;
-	char				*tmp;
-	int					rd;
+	static t_lst_db	*rest = NULL;
+	t_lst_db		*temp;
+	t_lst_db		*ini;
+	char			*tmp;
+	int				rd;
 
 	rd = 0;
 	if (rest == NULL)
 		rest = ft_lstnew_db(NULL, 0);
-	if (rst != NULL)
+	if (rst != NULL && (temp = ft_lstnew_db(NULL, 0)))
 	{
 		ini = ft_lstnew_db(rst, ft_strlen(rst));
-		temp = ft_lstnew_db(NULL, 0);
 		temp->content = ini;
 		temp->content_size = fd;
 		ft_lstadd_db(&rest, temp);
 		return (1);
 	}
-	if ((temp = gnl_recup_rest(fd, &rest)) == NULL)
+	if (!(temp = gnl_recup_rest(fd, &rest)) && (tmp = ft_strnew(BUFF_SIZE)))
 	{
-		tmp = ft_strnew(BUFF_SIZE);
 		if ((rd = read(fd, tmp, BUFF_SIZE)) < 0)
 			return (-1);
 		temp = ft_lstnew_db(tmp, rd);
@@ -91,8 +89,8 @@ static int		gnl_rest(int fd, t_lst_db **lst, char *rst)
 
 static int		gnl_act(char **line, char *str, int fd)
 {
-	int			i;
-	char		*rtn;
+	int				i;
+	char			*rtn;
 
 	i = ft_strclen(str, '\n');
 	if (i < 0)
@@ -108,11 +106,11 @@ static int		gnl_act(char **line, char *str, int fd)
 
 int				get_next_line(const int fd, char **line)
 {
-	char		*str;
-	int			rd;
-	t_lst_db	**lst;
-	t_lst_db	*ini;
-	char		*tmp;
+	char			*str;
+	int				rd;
+	t_lst_db		**lst;
+	t_lst_db		*ini;
+	char			*tmp;
 
 	ini = ft_lstnew_db(NULL, 0);
 	lst = &ini;
