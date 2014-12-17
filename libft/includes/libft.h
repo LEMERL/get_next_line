@@ -6,7 +6,7 @@
 /*   By: mgrimald <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 14:53:36 by mgrimald          #+#    #+#             */
-/*   Updated: 2014/11/30 17:33:28 by mgrimald         ###   ########.fr       */
+/*   Updated: 2014/12/17 15:17:43 by mgrimald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,6 @@ t_lst_db			*ft_lstgo_n_prev(t_lst_db *lst, int n);
 void				ft_lstdlone_db(t_lst_db **alst, void (*del)(void*, size_t));
 void				ft_lstdelall_db(t_lst_db **lst);
 char				*ft_lsttochar_db(t_lst_db **lst);
+void				ft_lstdellone_db(t_lst_db **alst);
 
 #endif

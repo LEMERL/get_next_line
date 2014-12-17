@@ -6,7 +6,7 @@
 #    By: mgrimald <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/10 17:46:31 by mgrimald          #+#    #+#              #
-#    Updated: 2014/12/13 15:51:11 by mgrimald         ###   ########.fr        #
+#    Updated: 2014/12/17 15:16:45 by mgrimald         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,8 @@ SRC = ft_memset.c \
 	  ft_lstdelone_db.c \
 	  ft_lstdel_db.c \
 	  ft_lstdelall_db.c \
-	  ft_lsttochar_db.c
+	  ft_lsttochar_db.c \
+	  ft_lstdellone_db.c
 
 OBJ = $(SRC:.c=.o)
 

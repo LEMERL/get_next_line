@@ -6,33 +6,21 @@
 /*   By: mgrimald <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/03 12:43:49 by mgrimald          #+#    #+#             */
-/*   Updated: 2014/12/17 14:37:25 by mgrimald         ###   ########.fr       */
+/*   Updated: 2014/12/17 15:31:29 by mgrimald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static void		ft_lstdellone_db(t_lst_db **alst)
+static int		gnl_smt(int fd, char *rst, t_lst_db *temp, t_lst_db *rest)
 {
-	t_lst_db		*temp;
+	t_lst_db		*ini;
 
-	temp = NULL;
-	if (alst && *alst)
-	{
-		if ((*alst)->prev)
-		{
-			(*alst)->prev->next = (*alst)->next;
-			temp = (*alst)->prev;
-		}
-		if ((*alst)->next)
-		{
-			(*alst)->next->prev = (*alst)->prev;
-			temp = (*alst)->next;
-		}
-		(*alst)->content_size = 0;
-		free(*alst);
-		*alst = temp;
-	}
+	ini = ft_lstnew_db(rst, ft_strlen(rst));
+	temp->content = ini;
+	temp->content_size = fd;
+	ft_lstadd_db(&rest, temp);
+	return (1);
 }
 
 static t_lst_db	*gnl_recup_rest(int fd, t_lst_db **rest)
@@ -61,7 +49,6 @@ static int		gnl_rest(int fd, t_lst_db **lst, char *rst)
 {
 	static t_lst_db	*rest = NULL;
 	t_lst_db		*temp;
-	t_lst_db		*ini;
 	char			*tmp;
 	int				rd;
 
@@ -70,14 +57,12 @@ static int		gnl_rest(int fd, t_lst_db **lst, char *rst)
 		rest = ft_lstnew_db(NULL, 0);
 	if (rst != NULL && (temp = ft_lstnew_db(NULL, 0)))
 	{
-		ini = ft_lstnew_db(rst, ft_strlen(rst));
-		temp->content = ini;
-		temp->content_size = fd;
-		ft_lstadd_db(&rest, temp);
+		gnl_smt(fd, rst, temp, rest);
 		return (1);
 	}
-	if (!(temp = gnl_recup_rest(fd, &rest)) && (tmp = ft_strnew(BUFF_SIZE)))
+	if ((temp = gnl_recup_rest(fd, &rest)) == NULL)
 	{
+		tmp = ft_strnew(BUFF_SIZE);
 		if ((rd = read(fd, tmp, BUFF_SIZE)) < 0)
 			return (-1);
 		temp = ft_lstnew_db(tmp, rd);
