@@ -6,7 +6,7 @@
 /*   By: mgrimald <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/25 19:38:55 by mgrimald          #+#    #+#             */
-/*   Updated: 2014/11/30 17:23:29 by mgrimald         ###   ########.fr       */
+/*   Updated: 2014/12/17 13:59:04 by mgrimald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ void	ft_lstadd_db(t_lst_db **alstdb, t_lst_db *nw)
 	{
 		nw->prev = (*alstdb)->prev;
 		nw->next = *alstdb;
+		if ((*alstdb)->prev)
+			(*alstdb)->prev->next = nw;
+		(*alstdb)->prev = nw;
 		*alstdb = nw;
 	}
 }
