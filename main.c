@@ -13,7 +13,7 @@ int		main()
 	int		k;
 	int		file = open("text.txt", O_RDONLY);
 	int		file_2 = open("text_2.txt", O_RDONLY);
-	int		file_3 = open("main.c", O_RDONLY);
+	int		file_3 = open("text_3.txt", O_RDONLY);
 	i = 42;
 	j = 42;
 	k = 42;
