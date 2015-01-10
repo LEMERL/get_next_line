@@ -6,7 +6,7 @@
 /*   By: mgrimald <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/27 17:19:06 by mgrimald          #+#    #+#             */
-/*   Updated: 2014/11/30 16:03:25 by mgrimald         ###   ########.fr       */
+/*   Updated: 2015/01/10 14:45:41 by mgrimald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	*ft_memdup(const void *s, int len)
 
 	if ((dup = (char*)malloc(len + 1)) == NULL)
 		return (NULL);
-	ft_memcpy(dup, s, 0);
+	dup[len] = '\0';
+	ft_memcpy(dup, s, len);
 	return (dup);
 }

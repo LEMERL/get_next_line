@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelall_db.c                                  :+:      :+:    :+:   */
+/*   ft_lstdelall.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgrimald <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/13 15:56:44 by mgrimald          #+#    #+#             */
-/*   Updated: 2014/12/13 15:57:03 by mgrimald         ###   ########.fr       */
+/*   Created: 2015/01/07 18:02:36 by mgrimald          #+#    #+#             */
+/*   Updated: 2015/01/07 18:20:45 by mgrimald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
-void	ft_lstdelall_db(t_lst_db **lst)
+void	ft_lstdelall_db(t_lst_db **alst)
 {
-	while (lst && (*lst) && (*lst)->prev != NULL)
+	t_lst_db	*tmp;
+
+	if (alst && *alst)
 	{
-		(*lst)->prev->next = *lst;
-		*lst = (*lst)->prev;
-	}
-	while (lst && (*lst) && (*lst)->next != NULL)
-	{
-		if ((*lst)->content != NULL)
+		while ((*alst)->prev != NULL)
+			*alst = (*alst)->prev;
+		while ((*alst) != NULL)
 		{
-			ft_memdel(&((*lst)->content));
-			(*lst)->content_size = 0;
+			tmp = (*alst)->next;
+			bzero((*alst)->content, (*alst)->content_size);
+			free((*alst)->content);
+			(*alst)->prev= NULL;
+			(*alst)->next= NULL;
+			free((*alst));
+			*alst = tmp;
 		}
-		*lst = (*lst)->next;
-		ft_memdel((void**)&(*lst)->prev);
 	}
-	if (lst)
-		ft_memdel((void**)lst);
 }

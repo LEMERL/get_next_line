@@ -6,7 +6,7 @@
 /*   By: mgrimald <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 14:53:36 by mgrimald          #+#    #+#             */
-/*   Updated: 2014/12/17 15:17:43 by mgrimald         ###   ########.fr       */
+/*   Updated: 2015/01/07 18:21:58 by mgrimald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ void				ft_lstadd(t_list **alst, t_list *nw);
 void				*ft_memdup(const void *s, int len);
 void				ft_lstadd_db(t_lst_db **alstdb, t_lst_db *nw);
 void				ft_lstdel_db(t_lst_db **alst, void (*del)(void*, size_t));
-void				ft_lstdlone_db(t_lst_db **alst, void (*del)(void*, size_t));
-t_lst_db			**ft_lstgetend_db(t_lst_db **lst);
-t_lst_db			**ft_lstgetstart_db(t_lst_db **lst);
+void				ft_lstdelone_db(t_lst_db **alst, void (*del)(void*, size_t));
+t_lst_db			*ft_lstgetend_db(t_lst_db **lst);
+t_lst_db			*ft_lstgetstart_db(t_lst_db **lst);
 int					ft_lstlen_db(t_lst_db *lst);
 t_lst_db			*ft_lstnew_db(void const *cont, size_t cont_size);
 int					ft_lstsumsize_db(t_lst_db *lst);
@@ -105,9 +105,9 @@ int					ft_strclen(const char *s, int c);
 int					ft_lstlen(t_list *list);
 t_lst_db			*ft_lstgo_n_next(t_lst_db *lst, int n);
 t_lst_db			*ft_lstgo_n_prev(t_lst_db *lst, int n);
-void				ft_lstdlone_db(t_lst_db **alst, void (*del)(void*, size_t));
-void				ft_lstdelall_db(t_lst_db **lst);
 char				*ft_lsttochar_db(t_lst_db **lst);
-void				ft_lstdellone_db(t_lst_db **alst);
+void				delzero(void *ptr, size_t size);
+void				del(void *ptr, size_t size);
+void				ft_lstdelall_db(t_lst_db **alst);
 
 #endif

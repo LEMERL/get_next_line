@@ -6,7 +6,7 @@
 #    By: mgrimald <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/10 17:46:31 by mgrimald          #+#    #+#              #
-#    Updated: 2014/12/17 15:16:45 by mgrimald         ###   ########.fr        #
+#    Updated: 2015/01/10 15:03:29 by mgrimald         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,12 @@ NAME = libft.a
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 DIR = includes
 
-SRC = ft_memset.c \
+SRC = del.c \
+	  ft_memset.c \
 	  ft_bzero.c \
 	  ft_memcpy.c \
 	  ft_memccpy.c \
@@ -87,11 +88,10 @@ SRC = ft_memset.c \
 	  ft_lstgo_n_next.c \
 	  ft_lstgetstart_db.c \
 	  ft_lstgetend_db.c \
-	  ft_lstdelone_db.c \
-	  ft_lstdel_db.c \
-	  ft_lstdelall_db.c \
 	  ft_lsttochar_db.c \
-	  ft_lstdellone_db.c
+	  ft_lstdelone_db.c \
+	  ft_lstdelall_db.c \
+	  ft_lstdel_db.c \
 
 OBJ = $(SRC:.c=.o)
 

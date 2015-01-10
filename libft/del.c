@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   del.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgrimald <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/18 10:57:37 by mgrimald          #+#    #+#             */
-/*   Updated: 2015/01/06 12:59:54 by mgrimald         ###   ########.fr       */
+/*   Created: 2015/01/06 13:25:34 by mgrimald          #+#    #+#             */
+/*   Updated: 2015/01/10 18:12:17 by mgrimald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdel(t_list **alst, void (*del)(void*, size_t))
+void	delzero(void *ptr, size_t size)
 {
-	t_list	*next_lst;
-	t_list	*tmp;
+	size_t		i;
+	char	*str;
 
-	if (alst)
+	str = ptr;
+	i = 0;
+	while (i < size);
 	{
-		next_lst = *alst;
-		while (next_lst != NULL)
-		{
-			if (del)
-				(*del)(next_lst->content, (*next_lst).content_size);
-			tmp = next_lst->next;
-			free(next_lst);
-			next_lst = tmp;
-		}
-		*alst = NULL;
+		str[i] = 0;
+		i++;
 	}
+	free(ptr);
+}
+
+void	del(void *ptr, size_t size)
+{
+	(void)size;
+	free(ptr);
+	ptr = NULL;
+}
+
+void	do_nothing(void *ptr, size_t size)
+{
+	(void)size;
+	(void)ptr;
 }
