@@ -53,6 +53,7 @@ static int		gnl_act(int fd, char **line, t_list **alst, char *str)
 	int		i;
 
 	rd = 1;
+	str = ft_strnew(BUFF_SIZE);
 	while (rd >= 0)
 	{
 		if ((i = ft_strclen((*alst)->content, '\n')) >= 0 || rd == 0)
@@ -83,12 +84,13 @@ int				get_next_line(const int fd, char **line)
 	rd = 1;
 	if (line == NULL)
 		return (-1);
-	str = ft_strnew(BUFF_SIZE);
 	if ((lst = gnl_rest(NULL)) == NULL)
 	{
+	str = ft_strnew(BUFF_SIZE);
 		if ((rd = read(fd, str, BUFF_SIZE)) <= 0)
 			return (rd);
 		lst = ft_lstnew(str, rd);
+			free(str);
 	}
 	return (gnl_act(fd, line, &lst, str));
 }
